@@ -6,7 +6,7 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
 
     assert_includes SessionsController.ancestors, expected_ancestor
     %i(create destroy new).each do |method|
-      SessionsController.public_method_defined?(method)
+      assert SessionsController.public_method_defined?(method)
     end
   end
 
