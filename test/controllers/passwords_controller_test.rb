@@ -1,3 +1,5 @@
+require 'test_helper'
+
 class PasswordsControllerTest < ActionDispatch::IntegrationTest
   test "inherits public methods from Clearance::PasswordsController" do
     expected_ancestor = Clearance::PasswordsController
