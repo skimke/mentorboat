@@ -6,7 +6,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
 
     assert_includes UsersController.ancestors, expected_ancestor
     %i(create new).each do |method|
-      UsersController.public_method_defined?(method)
+      assert UsersController.public_method_defined?(method)
     end
   end
 

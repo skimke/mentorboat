@@ -6,7 +6,7 @@ class PasswordsControllerTest < ActionDispatch::IntegrationTest
 
     assert_includes PasswordsController.ancestors, expected_ancestor
     %i(create edit new update).each do |method|
-      PasswordsController.public_method_defined?(method)
+      assert PasswordsController.public_method_defined?(method)
     end
   end
 end
