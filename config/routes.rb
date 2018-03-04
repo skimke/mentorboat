@@ -14,4 +14,8 @@ Rails.application.routes.draw do
   end
 
   get "signup", controller: :users, action: :new
+
+  constraints Clearance::Constraints::SignedOut.new do
+    root to: "sessions#new"
+  end
 end
