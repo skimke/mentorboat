@@ -50,7 +50,7 @@ en:
   sessions:
     form:
       forgot_password: Forgot password?
-      sign_up: Sign up
+      signup: Sign up
     new:
       title: Log in
   users:
