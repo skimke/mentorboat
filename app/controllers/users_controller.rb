@@ -1,4 +1,7 @@
 class UsersController < Clearance::UsersController
+  def show
+  end
+
   def create
     @user = user_from_params
 
@@ -21,6 +24,12 @@ class UsersController < Clearance::UsersController
       user.email = email
       user.password = password
       user.name = user_name
+    end
+  end
+
+  def redirect_signed_in_users
+    if signed_in?
+      redirect_to user_url(@user)
     end
   end
 end

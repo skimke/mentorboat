@@ -15,4 +15,12 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to login_url
   end
+
+  test "#create redirects to root" do
+    user = create(:user, password: 1111)
+
+    post session_url, params: { session: { email: user.email, password: user.password } }
+
+    assert_redirected_to root_url
+  end
 end
