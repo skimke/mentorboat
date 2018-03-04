@@ -1,6 +1,6 @@
 # mentorboat
 
-We're using ruby 2.5.0. It's best to use postmodern's [chruby](https://github.com/postmodern/chruby) and [ruby-install](https://github.com/postmodern/ruby-install) for no-nonsense ruby version management. If something else if working for you, you're all set to go!
+We're using ruby 2.5.0. It's best to use postmodern's [chruby](https://github.com/postmodern/chruby) and [ruby-install](https://github.com/postmodern/ruby-install) for no-nonsense ruby version management. If something else is working for you, you're all set to go!
 
 Our database is postgresql. [Postgresapp](http://postgresapp.com) is a livesaver. If you have postgresql installed any other way - make sure you know how to nuke them first before using this app, or don't use it at all.
 In any case, ensure the server is running before running `rails server`.
