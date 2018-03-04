@@ -10,9 +10,9 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
-  test "#destroy redirects to log_in_url" do
-    delete log_out_url
+  test "#destroy redirects to login_url" do
+    delete logout_url
 
-    assert_redirected_to log_in_url
+    assert_redirected_to login_url
   end
 end
