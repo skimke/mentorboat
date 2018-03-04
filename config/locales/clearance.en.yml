@@ -34,8 +34,8 @@ en:
         create: Sign up
   layouts:
     application:
-      log_in: Log in
-      log_out: Log out
+      login: Log in
+      logout: Log out
   passwords:
     create:
       description: You will receive an email within the next few minutes. It
@@ -55,5 +55,5 @@ en:
       title: Log in
   users:
     new:
-      log_in: Log in
+      login: Log in
       title: Sign up

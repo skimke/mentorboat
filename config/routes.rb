@@ -9,9 +9,9 @@ Rails.application.routes.draw do
   resource :session, only: [:create]
   
   controller :sessions do
-    get "log_in", action: :new
-    delete "log_out", action: :destroy
+    get "login", action: :new
+    delete "logout", action: :destroy
   end
 
-  get "sign_up", controller: :users, action: :new
+  get "signup", controller: :users, action: :new
 end
