@@ -11,5 +11,9 @@ FactoryBot.define do
       position nil
       company nil
     end
+
+    trait :admin do
+      is_admin true
+    end
   end
 end

@@ -60,3 +60,6 @@ en:
       title: Sign up
     show:
       title: Your professional details
+    index:
+      title: Applications
+      profile: View your own profile
