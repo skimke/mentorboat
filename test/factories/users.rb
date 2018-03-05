@@ -1,6 +1,7 @@
 FactoryBot.define do
   factory :user do
-    name "Hermione Granger"
+    first_name "Hermione"
+    last_name "Granger"
     position "CEO"
     company "League of Witches"
     experience_in_years 6
