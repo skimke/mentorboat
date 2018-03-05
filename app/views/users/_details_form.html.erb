@@ -1,4 +1,4 @@
-<%= form_for @user do |form| %>
+<%= form_for @user, html: { class: 'profile-details-form' } do |form| %>
   <div class="text-field">
     <%= form.label :position %>
     <%= form.text_field :position %>

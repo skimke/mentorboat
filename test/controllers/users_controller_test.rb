@@ -17,7 +17,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
 
     get user_url(user)
 
-    assert_template 'users/_details_form'
+    assert_select 'form.profile-details-form'
   end
 
   test "#show renders their complete profile if they have already saved more information" do
@@ -27,21 +27,23 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
 
     get user_url(user)
 
-    assert_template 'users/_details'
+    assert_select 'div.profile-details'
   end
 
   test "#create ensures name param is used to create new User record" do
     user_params = {
       email: 'new_user@gmail.com',
       password: '1234',
-      name: 'New User'
+      first_name: 'New',
+      last_name: 'User'
     }
 
     post users_url, params: { user: user_params }
 
     new_user = User.last
 
-    assert_equal 'New User', new_user.name
+    assert_equal 'New', new_user.first_name
+    assert_equal 'User', new_user.last_name
   end
 
   test "#update stores all params to existing user" do
