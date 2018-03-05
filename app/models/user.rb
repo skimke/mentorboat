@@ -7,4 +7,8 @@ class User < ApplicationRecord
   def experience
     experience_in_years
   end
+
+  def requires_details?
+    position.nil? || company.nil?
+  end
 end

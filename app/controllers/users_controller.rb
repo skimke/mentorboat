@@ -1,4 +1,8 @@
 class UsersController < Clearance::UsersController
+  def show
+    @user = current_user
+  end
+
   def create
     @user = user_from_params
 
@@ -8,6 +12,13 @@ class UsersController < Clearance::UsersController
     else
       render template: "users/new"
     end
+  end
+
+  def update
+    @user = current_user
+
+    @user.update_attributes!(user_update_params)
+    redirect_to user_url
   end
 
   private
@@ -22,5 +33,19 @@ class UsersController < Clearance::UsersController
       user.password = password
       user.name = user_name
     end
+  end
+
+  def redirect_signed_in_users
+    if signed_in?
+      redirect_to user_url(@user)
+    end
+  end
+
+  def user_update_params
+    params.require(:user).permit(
+      :position,
+      :company,
+      :experience_in_years
+    )
   end
 end

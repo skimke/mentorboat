@@ -10,6 +10,26 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
+  test "#show asks for more information on their profile if they haven't already saved them" do
+    user = create(:user, :new, password: 1234)
+
+    post session_url, params: { session: { email: user.email, password: user.password } }
+
+    get user_url(user)
+
+    assert_template 'users/_details_form'
+  end
+
+  test "#show renders their complete profile if they have already saved more information" do
+    user = create(:user, password: 1234)
+
+    post session_url, params: { session: { email: user.email, password: user.password } }
+
+    get user_url(user)
+
+    assert_template 'users/_details'
+  end
+
   test "#create ensures name param is used to create new User record" do
     user_params = {
       email: 'new_user@gmail.com',
@@ -22,5 +42,18 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     new_user = User.last
 
     assert_equal 'New User', new_user.name
+  end
+
+  test "#update stores all params to existing user" do
+    user = create(:user, :new, password: 1111)
+
+    post session_url, params: { session: { email: user.email, password: user.password } }
+
+    put user_path(user), params: { user: { position: 'Magician', company: 'Hogwarts' } }
+
+    assert_equal 'Magician', user.reload.position
+    assert_equal 'Hogwarts', user.company
+
+    assert_redirected_to user_url(user)
   end
 end
