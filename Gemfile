@@ -38,7 +38,6 @@ group :development, :test do
   gem 'factory_bot_rails', '~> 4.8.2'
   gem 'shoulda', '~> 3.5'
   gem 'shoulda-matchers', '~> 2.0'
-  gem 'rails-controller-testing', '~> 1.0.1'
 end
 
 group :development do
