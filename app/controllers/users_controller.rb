@@ -1,5 +1,6 @@
 class UsersController < Clearance::UsersController
   def show
+    @user = current_user
   end
 
   def create
@@ -31,5 +32,13 @@ class UsersController < Clearance::UsersController
     if signed_in?
       redirect_to user_url(@user)
     end
+  end
+
+  def user_update_params
+    params.require(:user).permit(
+      :position,
+      :company,
+      :experience_in_years
+    )
   end
 end

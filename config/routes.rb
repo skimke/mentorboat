@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :users, path: 'profiles', only: [:show, :create] do
+  resources :users, path: 'profiles', only: [:show, :create, :update] do
     resource :password,
       controller: :passwords, only: [:create, :edit, :update]
   end

@@ -32,6 +32,7 @@ en:
         submit: Log in
       user:
         create: Sign up
+        update: Save
   layouts:
     application:
       login: Log in
@@ -57,3 +58,5 @@ en:
     new:
       login: Log in
       title: Sign up
+    show:
+      title: Let us know your professional details

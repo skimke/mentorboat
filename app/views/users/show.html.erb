@@ -1,0 +1,9 @@
+<div class="profile">
+  <h2><%= t(".title") %></h2>
+
+  <% if @user.requires_details? %>
+    <%= render partial: '/users/details_form', object: @user %>
+  <% else %>
+    <%= render partial: '/users/details', object: @user %>
+  <% end %>
+</div>
