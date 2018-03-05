@@ -14,6 +14,13 @@ class UsersController < Clearance::UsersController
     end
   end
 
+  def update
+    @user = current_user
+
+    @user.update_attributes!(user_update_params)
+    redirect_to user_url
+  end
+
   private
 
   def user_from_params

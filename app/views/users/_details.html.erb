@@ -17,6 +17,6 @@
 
   <div>
     <p><%= link_to t(".link_text", default: "Change my password"),
-    edit_user_password_url(@user, token: @user.confirmation_token.html_safe) %></p>
+    edit_user_password_url(@user) %></p>
   </div>
 </div>

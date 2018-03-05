@@ -43,4 +43,17 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
 
     assert_equal 'New User', new_user.name
   end
+
+  test "#update stores all params to existing user" do
+    user = create(:user, :new, password: 1111)
+
+    post session_url, params: { session: { email: user.email, password: user.password } }
+
+    put user_path(user), params: { user: { position: 'Magician', company: 'Hogwarts' } }
+
+    assert_equal 'Magician', user.reload.position
+    assert_equal 'Hogwarts', user.company
+
+    assert_redirected_to user_url(user)
+  end
 end
