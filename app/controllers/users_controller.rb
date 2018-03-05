@@ -1,4 +1,6 @@
 class UsersController < Clearance::UsersController
+  before_action :ensure_admin, only: [:index]
+
   def index
   end
 
@@ -52,5 +54,11 @@ class UsersController < Clearance::UsersController
       :company,
       :experience_in_years
     )
+  end
+
+  def ensure_admin
+    unless current_user.is_admin?
+      redirect_to user_url(current_user)
+    end
   end
 end
