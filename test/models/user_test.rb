@@ -6,11 +6,29 @@ class UserTest < ActiveSupport::TestCase
   should validate_presence_of(:experience_in_years)
 
   setup do
-    @user = build_stubbed(:user)
+    @user = create(:user, password: 'supersafepassword123')
   end
 
   test '#experience returns experience_in_years' do
     expected = @user.experience_in_years
     assert_equal expected, @user.experience
+  end
+
+  test '#requires_details? returns false if position and company are both present' do
+    expected = false
+    assert_equal expected, @user.requires_details?
+  end
+
+  test '#requires_details? returns true if either position or company, or both are nil' do
+    expected = true
+
+    @user.update_attributes!(position: nil, company: 'EyeBeeEm')
+    assert_equal expected, @user.reload.requires_details?
+
+    @user.update_attributes!(position: 'Devloper', company: nil)
+    assert_equal expected, @user.reload.requires_details?
+
+    @user.update_attributes!(position: nil, company: nil)
+    assert_equal expected, @user.reload.requires_details?
   end
 end
