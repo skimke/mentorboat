@@ -8,14 +8,15 @@ class UsersController < Clearance::UsersController
 
   def index
     type = params[:type]
+    page = params[:page]
     @title = 'title'
 
     if type == 'mentors'
       @title = type
-      @users = User.mentors
+      @users = User.mentors.page(page).without_count
     elsif type == 'mentees'
       @title = type
-      @users = User.mentees
+      @users = User.mentees.page(page).without_count
     end
   end
 

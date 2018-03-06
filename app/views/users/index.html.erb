@@ -6,6 +6,9 @@
       <% @users.each do |user| %>
         <p><%= user.full_name %></p>
       <% end %>
+
+      <%= link_to_prev_page @users, t(".previous") %>
+      <%= link_to_next_page @users, t(".next") %>
     <% else %>
       <p>No applications left! 🎉</p>
     <% end %>

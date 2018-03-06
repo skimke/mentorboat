@@ -5,6 +5,8 @@ class User < ApplicationRecord
   validates :last_name, presence: true
   validates :experience_in_years, presence: true
 
+  paginates_per 20
+
   default_scope { order(created_at: :desc, first_name: :asc) }
 
   scope :mentors, -> { where(willing_to_mentor: true) }

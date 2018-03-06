@@ -69,4 +69,6 @@ en:
       profile: View your own profile
       mentors: Applications - Mentors
       mentees: Applications - Mentees
-      back: Back
+      back: Back to overview
+      previous: Prev
+      next: Next
