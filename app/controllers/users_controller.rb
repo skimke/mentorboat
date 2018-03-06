@@ -1,7 +1,22 @@
 class UsersController < Clearance::UsersController
-  before_action :ensure_admin, only: [:index]
+  before_action :ensure_admin, only: [:applications, :index]
+
+  def applications
+    @mentors_pending_approval = User.mentors.pending_approval.limit(10)
+    @mentees_pending_approval = User.mentees.pending_approval.limit(10)
+  end
 
   def index
+    type = params[:type]
+    @title = 'title'
+
+    if type == 'mentors'
+      @title = type
+      @users = User.mentors
+    elsif type == 'mentees'
+      @title = type
+      @users = User.mentees
+    end
   end
 
   def show

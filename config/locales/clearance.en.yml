@@ -60,6 +60,13 @@ en:
       title: Sign up
     show:
       title: Your professional details
+    applications:
+      title: Applications
+      profile: View your own profile
+      more-applications: View more
     index:
       title: Applications
       profile: View your own profile
+      mentors: Applications - Mentors
+      mentees: Applications - Mentees
+      back: Back
