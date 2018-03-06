@@ -2,8 +2,10 @@ class UsersController < Clearance::UsersController
   before_action :ensure_admin, only: [:applications, :index]
 
   def applications
-    @mentors_pending_approval = User.mentors.pending_approval.limit(10)
-    @mentees_pending_approval = User.mentees.pending_approval.limit(10)
+    @mentors_pending_approval = User.mentors.pending_approval.page(1).per(10)
+    @mentees_pending_approval = User.mentees.pending_approval.page(1).per(10)
+    @has_more_mentors = !@mentors_pending_approval.last_page?
+    @has_more_mentees = !@mentees_pending_approval.last_page?
   end
 
   def index
