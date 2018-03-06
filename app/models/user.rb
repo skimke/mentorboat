@@ -11,7 +11,7 @@ class User < ApplicationRecord
 
   scope :mentors, -> { where(willing_to_mentor: true) }
   scope :mentees, -> { where(willing_to_mentor: false) }
-  scope :pending_approval, -> { where(is_approved: false) }
+  scope :pending_approval, -> { where(is_approved: false, is_admin: false) }
 
   def full_name
     "#{first_name} #{last_name}"
