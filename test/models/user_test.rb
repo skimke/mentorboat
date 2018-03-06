@@ -26,6 +26,14 @@ class UserTest < ActiveSupport::TestCase
     assert_includes User.mentees, user2
   end
 
+  test '.pending_approval returns users with is_approved set to false' do
+    user1 = create(:user, is_approved: false)
+    user2 = create(:user, is_approved: true)
+
+    assert_includes User.pending_approval, user1
+    refute_includes User.pending_approval, user2
+  end
+
   test '#full_name returns first and last name joined with a space' do
     expected = 'Hermione Granger'
     assert_equal expected, @user.full_name
