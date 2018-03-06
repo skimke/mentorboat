@@ -17,7 +17,7 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "#create redirects to root" do
-    user = create(:user, password: 1111)
+    user = create(:user)
 
     post session_url, params: { session: { email: user.email, password: user.password } }
 
