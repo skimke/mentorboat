@@ -7,7 +7,8 @@ Rails.application.routes.draw do
   resources :passwords, only: [:create, :new]
 
   controller :users do
-    get "applications", action: :index
+    get "applications", action: :applications
+    get "applications/all", action: :index
     get "signup", action: :new
   end
 
@@ -18,7 +19,7 @@ Rails.application.routes.draw do
   end
 
   constraints Clearance::Constraints::SignedIn.new { |user| user.is_admin? } do
-    root to: "users#index", as: :admin_root
+    root to: "users#applications", as: :admin_root
   end
 
   constraints Clearance::Constraints::SignedIn.new do

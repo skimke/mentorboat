@@ -7,7 +7,31 @@ class UserTest < ActiveSupport::TestCase
   should validate_presence_of(:experience_in_years)
 
   setup do
-    @user = create(:user, password: 'supersafepassword123')
+    @user = create(:user)
+  end
+
+  test '.mentors returns users with willing_to_mentor set to true' do
+    user1 = create(:user, :mentor)
+    user2 = create(:user, :mentee)
+
+    assert_includes User.mentors, user1
+    refute_includes User.mentors, user2
+  end
+
+  test '.mentees returns users with willing_to_mentor set to false' do
+    user1 = create(:user, :mentor)
+    user2 = create(:user, :mentee)
+
+    refute_includes User.mentees, user1
+    assert_includes User.mentees, user2
+  end
+
+  test '.pending_approval returns users with is_approved set to false' do
+    user1 = create(:user, is_approved: false)
+    user2 = create(:user, is_approved: true)
+
+    assert_includes User.pending_approval, user1
+    refute_includes User.pending_approval, user2
   end
 
   test '#full_name returns first and last name joined with a space' do

@@ -1,7 +1,21 @@
 <div class="applications">
-  <h2><%= t(".title") %></h2>
+  <h2><%= t(".#{@title}") %></h2>
+
+  <div class="applications-pending">
+    <% if @users %>
+      <% @users.each do |user| %>
+        <p><%= user.full_name %></p>
+      <% end %>
+
+      <%= link_to_prev_page @users, t(".previous") %>
+      <%= link_to_next_page @users, t(".next") %>
+    <% else %>
+      <p>No applications left! 🎉</p>
+    <% end %>
+  </div>
 
   <div class="other-links">
+    <%= link_to t(".back"), applications_path %>
     <%= link_to t(".profile"), user_path(current_user) %>
   </div>
 </div>

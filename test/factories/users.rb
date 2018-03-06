@@ -5,7 +5,8 @@ FactoryBot.define do
     position "CEO"
     company "League of Witches"
     experience_in_years 6
-    email "herms@gmail.com"
+    sequence(:email) { |n| "herms+#{n}@gmail.com" }
+    password 1234
 
     trait :new do
       position nil
@@ -14,6 +15,14 @@ FactoryBot.define do
 
     trait :admin do
       is_admin true
+    end
+
+    trait :mentor do
+      willing_to_mentor true
+    end
+
+    trait :mentee do
+      willing_to_mentor false
     end
   end
 end

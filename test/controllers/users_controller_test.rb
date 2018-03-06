@@ -10,8 +10,8 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
-  test "#index is blocked for non-admin users" do
-    user = create(:user, password: 1234)
+  test "#applications is blocked for non-admin users" do
+    user = create(:user)
 
     post session_url, params: { session: { email: user.email, password: user.password } }
 
@@ -20,8 +20,8 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to user_url(user)
   end
 
-  test "#index is viewable for admin users" do
-    user = create(:user, :admin, password: 1234)
+  test "#applications is viewable for admin users" do
+    user = create(:user, :admin)
 
     post session_url, params: { session: { email: user.email, password: user.password } }
 
@@ -30,8 +30,28 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test "#index is blocked for non-admin users" do
+    user = create(:user)
+
+    post session_url, params: { session: { email: user.email, password: user.password } }
+
+    get applications_all_url
+
+    assert_redirected_to user_url(user)
+  end
+
+  test "#index is viewable for admin users" do
+    user = create(:user, :admin)
+
+    post session_url, params: { session: { email: user.email, password: user.password } }
+
+    get applications_all_url
+
+    assert_response :success
+  end
+
   test "#show asks for more information on their profile if they haven't already saved them" do
-    user = create(:user, :new, password: 1234)
+    user = create(:user, :new)
 
     post session_url, params: { session: { email: user.email, password: user.password } }
 
@@ -41,7 +61,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "#show renders their complete profile if they have already saved more information" do
-    user = create(:user, password: 1234)
+    user = create(:user)
 
     post session_url, params: { session: { email: user.email, password: user.password } }
 
@@ -67,7 +87,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "#update stores all params to existing user" do
-    user = create(:user, :new, password: 1111)
+    user = create(:user, :new)
 
     post session_url, params: { session: { email: user.email, password: user.password } }
 
