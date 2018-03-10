@@ -10,11 +10,6 @@ class RelationshipTest < ActiveSupport::TestCase
       mentor_id: mentor.id,
       mentee_id: mentee.id,
     )
-    @relationship2 = create(
-      :relationship,
-      mentor_id: mentor.id,
-      mentee_id: mentee.id,
-    )
   end
 
   test '#mentored_relationships returns all relationships where user is the mentee, not mentor' do
@@ -27,6 +22,18 @@ class RelationshipTest < ActiveSupport::TestCase
     assert_includes mentor.mentoring_relationships, relationship
 
     refute_includes mentee.mentoring_relationships, relationship
+  end
+
+  test '#mentors returns all mentee users associated with user through mentoring_relationship' do
+    assert_includes mentee.mentors, mentor
+
+    assert_empty mentor.mentors
+  end
+
+  test '#mentees returns all mentor users associated with user through mentored_relationship' do
+    assert_includes mentor.mentees, mentee
+
+    assert_empty mentee.mentees
   end
 
   private
