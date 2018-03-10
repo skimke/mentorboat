@@ -63,4 +63,44 @@ class UserTest < ActiveSupport::TestCase
     @user.update_attributes!(position: nil, company: nil)
     assert_equal expected, @user.reload.requires_details?
   end
+
+  test '#mentors returns all mentee users associated with user through mentoring_relationship' do
+    mentor = create(:user, :mentor)
+    mentee = create(:user, :mentee)
+    relationship = create(
+      :relationship,
+      mentor_id: mentor.id,
+      mentee_id: mentee.id,
+    )
+
+    assert_includes mentee.mentors, mentor
+    assert_empty mentor.mentors
+  end
+
+  test '#mentees returns all mentor users associated with user through mentored_relationship' do
+    mentor = create(:user, :mentor)
+    mentee = create(:user, :mentee)
+    create(
+      :relationship,
+      mentor_id: mentor.id,
+      mentee_id: mentee.id,
+    )
+
+    assert_includes mentor.mentees, mentee
+    assert_empty mentee.mentees
+  end
+
+  test '#cohorts returns all cohorts associated through relationships' do
+    mentor = create(:user, :mentor)
+    mentee = create(:user, :mentee)
+    cohort = create(:cohort)
+    create(
+      :relationship,
+      mentor_id: mentor.id,
+      mentee_id: mentee.id,
+      cohort_id: cohort.id
+    )
+
+    assert_includes mentor.cohorts, cohort
+  end
 end
