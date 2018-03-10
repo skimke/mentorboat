@@ -26,6 +26,32 @@ class UserTest < ActiveSupport::TestCase
     assert_includes User.mentees, user2
   end
 
+  test '#mentors returns all mentee users associated with user through mentoring_relationship' do
+    mentor = create(:user, :mentor)
+    mentee = create(:user, :mentee)
+    relationship = create(
+      :relationship,
+      mentor_id: mentor.id,
+      mentee_id: mentee.id,
+    )
+
+    assert_includes mentee.mentors, mentor
+    assert_empty mentor.mentors
+  end
+
+  test '#mentees returns all mentor users associated with user through mentored_relationship' do
+    mentor = create(:user, :mentor)
+    mentee = create(:user, :mentee)
+    relationship = create(
+      :relationship,
+      mentor_id: mentor.id,
+      mentee_id: mentee.id,
+    )
+
+    assert_includes mentor.mentees, mentee
+    assert_empty mentee.mentees
+  end
+
   test '.pending_approval returns users with is_approved set to false and is_admin is false' do
     user1 = create(:user, is_approved: false)
     user2 = create(:user, is_approved: true)
