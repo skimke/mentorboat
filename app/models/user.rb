@@ -1,6 +1,11 @@
 class User < ApplicationRecord
   include Clearance::User
 
+  has_many :mentored_relationships, class_name: 'Relationship', foreign_key: 'mentee_id'
+  has_many :mentoring_relationships, class_name: 'Relationship', foreign_key: 'mentor_id'
+  has_many :mentors, through: :mentored_relationships
+  has_many :mentees, through: :mentoring_relationships
+  
   validates :first_name, presence: true
   validates :last_name, presence: true
   validates :experience_in_years, presence: true
