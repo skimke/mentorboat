@@ -5,6 +5,8 @@ class User < ApplicationRecord
   has_many :mentoring_relationships, class_name: 'Relationship', foreign_key: 'mentor_id'
   has_many :mentors, through: :mentored_relationships
   has_many :mentees, through: :mentoring_relationships
+  has_many :cohorts, through: :mentored_relationships
+  has_many :cohorts, through: :mentoring_relationships
   
   validates :first_name, presence: true
   validates :last_name, presence: true
