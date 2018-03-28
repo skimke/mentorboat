@@ -90,10 +90,11 @@ class UserTest < ActiveSupport::TestCase
     assert_empty mentee.mentees
   end
 
-  test '#cohorts returns all cohorts associated through relationships' do
+  test '#mentoring_cohorts returns all cohorts associated through mentoring relationships' do
     mentor = create(:user, :mentor)
     mentee = create(:user, :mentee)
     cohort = create(:cohort)
+
     create(
       :relationship,
       mentor_id: mentor.id,
@@ -101,6 +102,69 @@ class UserTest < ActiveSupport::TestCase
       cohort_id: cohort.id
     )
 
-    assert_includes mentor.cohorts, cohort
+    assert_includes mentor.mentoring_cohorts, cohort
+  end
+
+  test '#mentored_cohorts returns all cohorts associated through mentored relationships' do
+    mentor = create(:user, :mentor)
+    mentee = create(:user, :mentee)
+    cohort = create(:cohort)
+
+    create(
+      :relationship,
+      mentor_id: mentor.id,
+      mentee_id: mentee.id,
+      cohort_id: cohort.id
+    )
+
+    assert_includes mentee.mentored_cohorts, cohort
+  end
+
+  test '#cohorts returns all cohorts associated through both types of relationships' do
+    mentor = create(:user, :mentor)
+    mentors_mentor = create(:user, :mentor)
+    mentee = create(:user, :mentee)
+    
+    mentoring_cohort = create(:cohort)
+    mentored_cohort = create(:cohort)
+
+    create(
+      :relationship,
+      mentor_id: mentor.id,
+      mentee_id: mentee.id,
+      cohort_id: mentoring_cohort.id
+    )
+    create(
+      :relationship,
+      mentor_id: mentors_mentor.id,
+      mentee_id: mentor.id,
+      cohort_id: mentored_cohort.id
+    )
+
+    assert_includes mentor.cohorts, mentoring_cohort
+    assert_includes mentor.cohorts, mentored_cohort
+  end
+
+  test '#cohorts returns all cohorts associated through both types of relationships without duplication' do
+    mentor = create(:user, :mentor)
+    mentors_mentor = create(:user, :mentor)
+    mentee = create(:user, :mentee)
+    
+    cohort = create(:cohort)
+
+    create(
+      :relationship,
+      mentor_id: mentor.id,
+      mentee_id: mentee.id,
+      cohort_id: cohort.id
+    )
+    create(
+      :relationship,
+      mentor_id: mentors_mentor.id,
+      mentee_id: mentor.id,
+      cohort_id: cohort.id
+    )
+
+    assert_equal [cohort], mentor.cohorts
   end
 end
