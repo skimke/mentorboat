@@ -90,10 +90,11 @@ class UserTest < ActiveSupport::TestCase
     assert_empty mentee.mentees
   end
 
-  test '#cohorts returns all cohorts associated through relationships' do
+  test '#mentoring_cohorts returns all cohorts associated through mentoring relationships' do
     mentor = create(:user, :mentor)
     mentee = create(:user, :mentee)
     cohort = create(:cohort)
+
     create(
       :relationship,
       mentor_id: mentor.id,
@@ -101,6 +102,21 @@ class UserTest < ActiveSupport::TestCase
       cohort_id: cohort.id
     )
 
-    assert_includes mentor.cohorts, cohort
+    assert_includes mentor.mentoring_cohorts, cohort
+  end
+
+  test '#mentored_cohorts returns all cohorts associated through mentored relationships' do
+    mentor = create(:user, :mentor)
+    mentee = create(:user, :mentee)
+    cohort = create(:cohort)
+
+    create(
+      :relationship,
+      mentor_id: mentor.id,
+      mentee_id: mentee.id,
+      cohort_id: cohort.id
+    )
+
+    assert_includes mentee.mentored_cohorts, cohort
   end
 end
