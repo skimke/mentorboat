@@ -30,4 +30,11 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  cohorts:
+    index:
+      title: Cohorts
+      previous: Prev
+      next: Next
+      no_cohorts: There are no cohorts yet.
+      new: Schedule a new cohort
+      back: Back

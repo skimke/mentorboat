@@ -5,4 +5,8 @@ class Cohort < ApplicationRecord
 
   validates :starts_at, presence: true
   validates :ends_at, presence: true
+
+  paginates_per 10
+
+  default_scope { order(starts_at: :asc, name: :asc) }
 end

@@ -1,0 +1,23 @@
+<div class="cohorts">
+  <h2><%= t(".title") %></h2>
+
+  <div class="cohorts-list">
+    <% if @cohorts %>
+      <% @cohorts.each do |cohort| %>
+        <p><%= cohort.name %></p>
+      <% end %>
+
+      <%= link_to_prev_page @cohorts, t(".previous") %>
+      <%= link_to_next_page @cohorts, t(".next") %>
+    <% else %>
+      <p><%= t(".no_cohorts") %></p>
+    <% end %>
+  </div>
+
+  <div class="other-links">
+    <%= link_to t(".back"), applications_path %>
+    <% if current_user.is_admin? %>
+      <div><a href="#"><%= t(".new") %></a></div>
+    <% end %>
+  </div>
+</div>
