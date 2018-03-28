@@ -19,6 +19,51 @@ class CohortsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test '#index displays all cohorts for admin users' do
+    user = create(:user, :admin)
+    create(:cohort, :spring)
+    create(:cohort, :summer)
+    create(:cohort, :fall)
+    create(:cohort, :winter)
+
+    post session_url, params: { session: { email: user.email, password: user.password } }
+
+    get cohorts_url
+
+    assert_select 'div.cohorts-list' do
+      assert_select 'p', 4
+    end
+  end
+
+  test '#index displays only cohorts that a user belongs to through their relationships if user is not an admin' do
+    user = create(:user, :mentor)
+    cohort_for_user_as_mentee = create(:cohort, :spring)
+    cohort_for_user_as_mentor = create(:cohort, :summer)
+    create(:cohort, :fall)
+    create(:cohort, :winter)
+
+    create(
+      :relationship,
+      mentor: create(:user, :mentor),
+      mentee: user,
+      cohort: cohort_for_user_as_mentee
+    )
+    create(
+      :relationship,
+      mentor: user,
+      mentee: create(:user, :mentee),
+      cohort: cohort_for_user_as_mentor
+    )
+
+    post session_url, params: { session: { email: user.email, password: user.password } }
+
+    get cohorts_url
+
+    assert_select 'div.cohorts-list' do
+      assert_select 'p', 2
+    end
+  end
+
   test '#index shows a link to creating new cohorts for admin users' do
     user = create(:user, :admin)
 
