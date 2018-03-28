@@ -33,6 +33,6 @@ class User < ApplicationRecord
   end
 
   def cohorts
-    [*mentoring_cohorts, *mentored_cohorts]
+    [*mentoring_cohorts, *mentored_cohorts].uniq
   end
 end
