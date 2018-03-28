@@ -31,4 +31,8 @@ class User < ApplicationRecord
   def requires_details?
     position.nil? || company.nil?
   end
+
+  def cohorts
+    [*mentoring_cohorts, *mentored_cohorts]
+  end
 end
