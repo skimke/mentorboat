@@ -18,6 +18,8 @@ Rails.application.routes.draw do
     delete "logout", action: :destroy
   end
 
+  resources :cohorts
+
   constraints Clearance::Constraints::SignedIn.new { |user| user.is_admin? } do
     root to: "users#applications", as: :admin_root
   end
