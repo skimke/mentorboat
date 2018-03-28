@@ -90,6 +90,34 @@ class UserTest < ActiveSupport::TestCase
     assert_empty mentee.mentees
   end
 
+  test '#mentored_relationships returns all relationships where user is the mentee, not mentor' do
+    mentor = create(:user, :mentor)
+    mentee = create(:user, :mentee)
+    relationship = create(
+      :relationship,
+      mentor_id: mentor.id,
+      mentee_id: mentee.id,
+    )
+
+    assert_includes mentee.mentored_relationships, relationship
+
+    refute_includes mentor.mentored_relationships, relationship
+  end
+
+  test '#mentoring_relationships returns all relationships where user is the mentor, not mentee' do
+    mentor = create(:user, :mentor)
+    mentee = create(:user, :mentee)
+    relationship = create(
+      :relationship,
+      mentor_id: mentor.id,
+      mentee_id: mentee.id,
+    )
+
+    assert_includes mentor.mentoring_relationships, relationship
+
+    refute_includes mentee.mentoring_relationships, relationship
+  end
+
   test '#mentoring_cohorts returns all cohorts associated through mentoring relationships' do
     mentor = create(:user, :mentor)
     mentee = create(:user, :mentee)
