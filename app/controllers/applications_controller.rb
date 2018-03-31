@@ -19,6 +19,8 @@ class ApplicationsController < ApplicationController
     elsif type == 'mentees'
       @title = type
       @users = User.pending_approval.mentees.page(page).without_count
+    else
+      @users = User.pending_approval.page(page).without_count
     end
   end
 

@@ -2,36 +2,37 @@
   <h2><%= t(".title") %></h2>
 
   <div class="applications-pending-mentors">
-    <h5>Mentors</h5>
+    <h5><%= t(".mentors") %></h5>
     <% if @mentors_pending_approval.any? %>
       <% @mentors_pending_approval.each do |mentor_user| %>
         <p><%= mentor_user.full_name %></p>
       <% end %>
 
       <% if @has_more_mentors %>
-        <%= link_to t(".more-applications"), applications_path(type: 'mentors') %>
+        <%= link_to t(".more_applications"), applications_path(type: 'mentors') %>
       <% end %>
     <% else %>
-      <p>No mentors are waiting on us yet.</p>
+      <p><%= t(".no_mentors") %></p>
     <% end %>
   </div>
 
   <div class="applications-pending-mentees">
-    <h5>Mentees</h5>
+    <h5><%= t(".mentees") %></h5>
     <% if @mentees_pending_approval.any? %>
       <% @mentees_pending_approval.each do |mentee_user| %>
         <p><%= mentee_user.full_name %></p>
       <% end %>
 
       <% if @has_more_mentees %>
-        <%= link_to t(".more-applications"), applications_path(type: 'mentees') %>
+        <%= link_to t(".more_applications"), applications_path(type: 'mentees') %>
       <% end %>
     <% else %>
-      <p>No mentees are waiting on us yet.</p>
+      <p><%= t(".no_mentees") %></p>
     <% end %>
   </div>
 
   <div class="other-links">
+    <%= link_to t(".approved_users"), users_path %>
     <%= link_to t(".profile"), user_path(current_user) %>
   </div>
 </div>

@@ -10,12 +10,13 @@
       <%= link_to_prev_page @users, t(".previous") %>
       <%= link_to_next_page @users, t(".next") %>
     <% else %>
-      <p>No applications left! 🎉</p>
+      <p><%= t(".no_applications") %></p>
     <% end %>
   </div>
 
   <div class="other-links">
     <%= link_to t(".back"), applications_preview_path %>
+    <%= link_to t(".approved_users"), users_path %>
     <%= link_to t(".profile"), user_path(current_user) %>
   </div>
 </div>
