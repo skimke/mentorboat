@@ -25,7 +25,7 @@ Rails.application.routes.draw do
   end
 
   constraints Clearance::Constraints::SignedIn.new do
-    root to: "users#show", as: :signed_in_root
+    root to: "cohorts#index", as: :signed_in_root
   end
 
   constraints Clearance::Constraints::SignedOut.new do

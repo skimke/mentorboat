@@ -3,12 +3,12 @@ en:
   clearance:
     models:
       clearance_mailer:
-        change_password: Change your password
+        change_password: Change password
   clearance_mailer:
     change_password:
       closing: If you didn't request this, ignore this email. Your password has
         not been changed.
-      link_text: Change my password
+      change_password: Change password
       opening: "Someone, hopefully you, requested we send you a link to change
         your password:"
   flashes:
@@ -43,11 +43,11 @@ en:
         contains instructions for changing your password.
     edit:
       description: Your password has been reset. Choose a new password below.
-      title: Change your password
+      title: Change password
     new:
       description: To be emailed a link to reset your password, please enter
         your email address.
-      title: Reset your password
+      title: Reset password
   sessions:
     form:
       forgot_password: Forgot password?
@@ -57,11 +57,13 @@ en:
   users:
     index:
       title: Profiles - Approved Users
-      profile: View your own profile
+      profile: View my profile
       applications: View Applications
       no_approved_users: There are no approved users yet.
     new:
       login: Log in
       title: Sign up
     show:
-      title: Your professional details
+      title: Profile
+      show: View my profile
+      change_password: Change password

@@ -45,7 +45,7 @@ en:
   applications:
     preview_applications:
       title: Applications
-      profile: View your own profile
+      profile: View my profile
       more_applications: View more
       mentors: Mentors
       mentees: Mentees
@@ -54,7 +54,7 @@ en:
       approved_users: View approved users
     applications:
       title: Applications
-      profile: View your own profile
+      profile: View my profile
       mentors: Applications - Mentors
       mentees: Applications - Mentees
       back: Back to overview
