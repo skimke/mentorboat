@@ -14,7 +14,7 @@
   <div class="other-links">
   <% if current_user == @user %>
     <p><%= link_to t(".change_password"),
-    edit_user_password_url(@user) %></p>
+    edit_user_password_url(current_user) %></p>
   <% else %>
     <p><%= link_to t(".show"), user_path(current_user) %></p>
   <% end %>
