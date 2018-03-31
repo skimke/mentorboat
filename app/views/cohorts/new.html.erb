@@ -1,0 +1,15 @@
+<div class="cohort-new">
+  <h2><%= t(".title") %></h2>
+
+  <%= form_for @cohort do |form| %>
+    <%= render partial: '/cohorts/form', object: form %>
+
+    <div class="submit-field">
+      <%= form.submit %>
+    </div>
+
+    <div class="other-links">
+      <div><%= link_to t(".cancel"), cohorts_path %></div>
+    </div>
+  <% end %>
+</div>

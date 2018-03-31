@@ -47,6 +47,9 @@ en:
       cancel: Cancel
       cohorts: See all cohorts
       new: Schedule a new cohort
+    new:
+      title: Schedule a new cohort
+      cancel: Cancel
   applications:
     preview_applications:
       title: Applications

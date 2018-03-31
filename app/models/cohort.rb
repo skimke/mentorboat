@@ -6,7 +6,7 @@ class Cohort < ApplicationRecord
   validates :starts_at, presence: true
   validates :ends_at, presence: true
 
-  before_update :ensure_ends_at_end_of_day
+  before_save :ensure_ends_at_end_of_day
 
   paginates_per 10
 

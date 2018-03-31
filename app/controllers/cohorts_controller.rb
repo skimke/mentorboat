@@ -21,6 +21,10 @@ class CohortsController < ApplicationController
     @relationships = @cohort.relationships.page(page).per(10)
   end
 
+  def new
+    @cohort = Cohort.new
+  end
+
   def create
     @cohort = cohort_from_params
 
@@ -43,11 +47,7 @@ class CohortsController < ApplicationController
   private
 
   def cohort_from_params
-    ends_at = cohort_params.delete(:ends_at)
-
-    Cohort.new(cohort_params).tap do |cohort|
-      cohort.ends_at = Time.zone.parse(ends_at).end_of_day
-    end
+    Cohort.new(cohort_params)
   end
 
   def cohort_params
