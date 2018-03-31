@@ -1,0 +1,15 @@
+<div class="profile">
+  <h2><%= @user.first_name %>'s <%= t(".title")%></h2>
+
+  <% if @user.willing_to_mentor? %>
+    <p><%= t(".willing_to_mentor") %></p>
+  <% else %>
+    <p><%= t(".not_willing_to_mentor") %></p>
+  <% end %>
+
+  <%= render partial: '/users/details', object: @user %>
+
+  <div class="other-links">
+    <p><%= link_to t(".applications"), applications_path %></p>
+  </div>
+</div>

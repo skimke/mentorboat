@@ -24,6 +24,11 @@ class ApplicationsController < ApplicationController
     end
   end
 
+  def show
+    user_id = params[:user_id]
+    @user = User.find(user_id)
+  end
+
   private
 
   def ensure_admin

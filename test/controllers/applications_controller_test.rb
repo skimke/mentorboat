@@ -40,4 +40,24 @@ class ApplicationsControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :success
   end
+
+  test "#show is blocked for non-admin users" do
+    user = create(:user)
+
+    post session_url, params: { session: { email: user.email, password: user.password } }
+
+    get application_url(user)
+
+    assert_redirected_to user_url(user)
+  end
+
+  test "#show is viewable for admin users" do
+    user = create(:user, :admin)
+
+    post session_url, params: { session: { email: user.email, password: user.password } }
+
+    get application_url(user)
+
+    assert_response :success
+  end
 end

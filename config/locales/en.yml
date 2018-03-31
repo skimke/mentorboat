@@ -70,3 +70,8 @@ en:
       next: Next
       no_applications: No applications left! 🎉
       approved_users: View approved users
+    show:
+      title: Application
+      applications: All applications
+      willing_to_mentor: "Willing to Mentor: Yes"
+      not_willing_to_mentor: "Willing to Mentor: No"

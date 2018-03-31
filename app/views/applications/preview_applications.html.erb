@@ -5,7 +5,7 @@
     <h5><%= t(".mentors") %></h5>
     <% if @mentors_pending_approval.any? %>
       <% @mentors_pending_approval.each do |mentor_user| %>
-        <p><%= mentor_user.full_name %></p>
+        <p><%= link_to mentor_user.full_name, application_path(mentor_user) %></p>
       <% end %>
 
       <% if @has_more_mentors %>
@@ -20,7 +20,7 @@
     <h5><%= t(".mentees") %></h5>
     <% if @mentees_pending_approval.any? %>
       <% @mentees_pending_approval.each do |mentee_user| %>
-        <p><%= mentee_user.full_name %></p>
+        <p><%= link_to mentee_user.full_name, application_path(mentee_user) %></p>
       <% end %>
 
       <% if @has_more_mentees %>

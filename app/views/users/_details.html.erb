@@ -6,10 +6,10 @@
     <p>Email: <%= @user.email %></p>
   </div>
   <div>
-    <p>Position: <%= @user.position %></p>
+    <p>Position: <%= @user.position || 'N/A' %></p>
   </div>
   <div>
-    <p>Company: <%= @user.company %></p>
+    <p>Company: <%= @user.company || 'N/A' %></p>
   </div>
   <div>
     <p>Experience (years): <%= @user.experience %></p>
