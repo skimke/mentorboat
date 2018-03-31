@@ -1,8 +1,10 @@
 <div class="cohort">
   <h2><%= @cohort.name %></h2>
+  <p>Starts on <%= @cohort.starts_at.to_formatted_s(:long_ordinal) %></p>
+  <p>Ends on <%= @cohort.ends_at.to_formatted_s(:long_ordinal) %></p>
 
   <div class="cohort-relationships">
-    <% if @relationships %>
+    <% if @relationships.present? %>
       <% @relationships.each do |relationship| %>
         <p>
           Mentor: <%= link_to relationship.mentor.full_name, user_path(relationship.mentor) %>, Mentee: <%= link_to relationship.mentee.full_name, user_path(relationship.mentee) %>
@@ -16,11 +18,11 @@
     <% end %>
   </div>
 
-
   <div class="other-links">
-    <%= link_to t(".back"), cohorts_path %>
+    <div><%= link_to t(".edit"), edit_cohort_path(@cohort) %></div>
+    <div><%= link_to t(".back"), cohorts_path %></div>
     <% if current_user.is_admin? %>
-      <div><a href="#"><%= t(".new") %></a></div>
+      <div><%= link_to t(".new"), new_cohort_path %></div>
     <% end %>
   </div>
 </div>

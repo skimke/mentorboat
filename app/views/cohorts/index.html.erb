@@ -16,7 +16,7 @@
 
   <div class="other-links">
     <% if current_user.is_admin? %>
-      <div><a href="#"><%= t(".new") %></a></div>
+      <div><%= link_to t(".new"), new_cohort_path %></div>
     <% end %>
   </div>
 </div>

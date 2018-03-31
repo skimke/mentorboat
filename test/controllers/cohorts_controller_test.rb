@@ -126,4 +126,106 @@ class CohortsControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :success
   end
+
+  test '#new returns success for admin users' do
+    user = create(:user, :admin)
+
+    post session_url, params: { session: { email: user.email, password: user.password } }
+
+    get new_cohort_url
+
+    assert_response :success
+  end
+
+  test '#new redirects to cohorts index for non-admin users' do
+    user = create(:user)
+
+    post session_url, params: { session: { email: user.email, password: user.password } }
+
+    get new_cohort_url
+
+    assert_redirected_to cohorts_url
+  end
+
+  test '#edit returns success for admin users' do
+    user = create(:user, :admin)
+    cohort = create(:cohort, :spring)
+
+    post session_url, params: { session: { email: user.email, password: user.password } }
+
+    get edit_cohort_url(cohort)
+
+    assert_response :success
+  end
+
+  test '#edit redirects to cohorts index for non-admin users' do
+    user = create(:user)
+    cohort = create(:cohort, :spring)
+
+    post session_url, params: { session: { email: user.email, password: user.password } }
+
+    get edit_cohort_url(cohort)
+
+    assert_redirected_to cohorts_url
+  end
+
+  test '#create returns success for admin users' do
+    user = create(:user, :admin)
+    post session_url, params: { session: { email: user.email, password: user.password } }
+
+    cohort_params = {
+      name: 'New Cohort',
+      starts_at: Date.new(2018, 3, 1),
+      ends_at: Date.new(2018, 5, 1)
+    }
+
+    assert_changes -> { Cohort.count } do
+      post cohorts_url, params: { cohort: cohort_params }
+    end
+
+    new_cohort = Cohort.last
+
+    assert_equal 'New Cohort', new_cohort.name
+    assert_equal Date.new(2018, 3, 1), new_cohort.starts_at
+    assert_in_delta Date.new(2018, 5, 1).end_of_day, new_cohort.ends_at, 1.second
+
+    assert_redirected_to cohort_url(new_cohort)
+  end
+
+  test '#create redirects to cohorts index for non-admin users' do
+    user = create(:user)
+    post session_url, params: { session: { email: user.email, password: user.password } }
+
+    assert_no_changes -> { Cohort.count } do
+      post cohorts_url
+    end
+
+    assert_redirected_to cohorts_url
+  end
+
+  test '#update returns success for admin users' do
+    user = create(:user, :admin)
+    cohort = create(:cohort, :spring, name: 'Spring')
+    post session_url, params: { session: { email: user.email, password: user.password } }
+
+    cohort_params = { name: 'Different Cohort Name' }
+
+    assert_changes -> { cohort.reload.name }, from: 'Spring', to: 'Different Cohort Name' do
+      put cohort_url(cohort), params: { cohort: cohort_params }
+    end
+
+    assert_redirected_to cohort_url(cohort)
+  end
+
+  test '#update redirects to cohorts index for non-admin users' do
+    user = create(:user)
+    cohort = create(:cohort, :spring)
+    post session_url, params: { session: { email: user.email, password: user.password } }
+
+    assert_no_changes -> { cohort.reload } do
+      put cohort_url(cohort)
+    end
+
+    assert_redirected_to cohorts_url
+  end
 end
