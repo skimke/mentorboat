@@ -9,13 +9,17 @@
 
   <%= render partial: '/users/details', object: @user %>
 
-  <%= form_tag "/applications/#{@user.id}", method: 'patch' do %>
-    <div class="text-field">
-      <%= label_tag :cohort, t(".select_cohort") %>
-      <%= collection_select(:cohort, :cohort_id, @cohorts, :id, :name) %>
-    </div>
+  <% if @cohorts.present? %>
+    <%= form_tag "/applications/#{@user.id}", method: 'patch' do %>
+      <div class="text-field">
+        <%= label_tag :cohort, t(".select_cohort") %>
+        <%= collection_select(:cohort, :cohort_id, @cohorts, :id, :name) %>
+      </div>
 
-    <div class="submit"><%= submit_tag t(".submit") %></div>
+      <div class="submit"><%= submit_tag t(".submit") %></div>
+    <% end %>
+  <% else %>
+    <p><%= link_to t(".new_cohort"), new_cohort_path %></p>
   <% end %>
 
   <div class="other-links">
