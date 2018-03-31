@@ -1,4 +1,5 @@
 class CohortsController < ApplicationController
+  before_action :ensure_admin, only: [:new, :create, :edit, :update]
   before_action :ensure_admin_or_belongs_to_cohort, only: :show
 
   def index
@@ -20,7 +21,39 @@ class CohortsController < ApplicationController
     @relationships = @cohort.relationships.page(page).per(10)
   end
 
+  def edit
+    @cohort = Cohort.find(params[:id])
+  end
+
+  def create
+    @cohort = cohort_from_params
+
+    if @cohort.save
+      redirect_to cohort_url(@cohort)
+    end
+  end
+
   private
+
+  def cohort_from_params
+    ends_at = cohort_params.delete(:ends_at)
+
+    Cohort.new(cohort_params).tap do |cohort|
+      cohort.ends_at = Time.zone.parse(ends_at).end_of_day
+    end
+  end
+
+  def cohort_params
+    params.require(:cohort).permit(
+      :name,
+      :starts_at,
+      :ends_at
+    )
+  end
+
+  def ensure_admin
+    redirect_to cohorts_url unless current_user.is_admin?
+  end
 
   def cohort_id
     @cohort_id = params[:id]
