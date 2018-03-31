@@ -1,0 +1,19 @@
+<div class="cohort-edit">
+  <h2><%= t(".title") %> <%= @cohort.name %></h2>
+
+  <%= form_for @cohort do |form| %>
+    <%= render partial: '/cohorts/form', object: form %>
+
+    <div class="submit-field">
+      <%= form.submit %>
+    </div>
+
+    <div class="other-links">
+      <div><%= link_to t(".cancel"), cohort_path(@cohort) %></div>
+      <div><%= link_to t(".cohorts"), cohorts_path %></div>
+      <% if current_user.is_admin? %>
+        <div><a href="#"><%= t(".new") %></a></div>
+      <% end %>
+    </div>
+  <% end %>
+</div>

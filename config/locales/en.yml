@@ -40,7 +40,13 @@ en:
     show:
       no_users: There are no mentors or mentees yet for this cohort.
       new: Schedule a new cohort
+      edit: Edit this cohort
       back: Back to Cohorts
+    edit:
+      title: Edit
+      cancel: Cancel
+      cohorts: See all cohorts
+      new: Schedule a new cohort
   applications:
     preview_applications:
       title: Applications

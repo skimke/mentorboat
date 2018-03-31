@@ -54,6 +54,16 @@ class CohortTest < ActiveSupport::TestCase
     assert_empty Cohort.by_id_and_user_id(cohort.id, user.id)
   end
 
+  test 'update ensures ends_at is set to end of day specified' do
+    cohort = create(:cohort, :spring)
+    expected_date = Date.new(2018, 6, 30)
+    cohort.ends_at = expected_date
+
+    cohort.save!
+
+    assert_in_delta expected_date.end_of_day, cohort.reload.ends_at, 1.second
+  end
+
   test '#mentors returns all mentoring users' do
     assert_includes cohort.mentors, mentor
     refute_includes cohort.mentors, mentee

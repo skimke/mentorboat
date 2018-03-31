@@ -6,6 +6,8 @@ class Cohort < ApplicationRecord
   validates :starts_at, presence: true
   validates :ends_at, presence: true
 
+  before_update :ensure_ends_at_end_of_day
+
   paginates_per 10
 
   default_scope { order(starts_at: :asc, name: :asc) }
@@ -18,4 +20,11 @@ class Cohort < ApplicationRecord
       user_id
     ).where('cohorts.id = ?', id)
   }
+
+  private
+
+  def ensure_ends_at_end_of_day
+    ends_at_end_of_day = self.ends_at.end_of_day
+    self.ends_at = ends_at_end_of_day
+  end
 end
