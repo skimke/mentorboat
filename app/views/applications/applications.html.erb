@@ -2,7 +2,7 @@
   <h2><%= t(".#{@title}") %></h2>
 
   <div class="applications-pending">
-    <% if @users %>
+    <% if @users.present? %>
       <% @users.each do |user| %>
         <p><%= user.full_name %></p>
       <% end %>
@@ -15,7 +15,7 @@
   </div>
 
   <div class="other-links">
-    <%= link_to t(".back"), applications_path %>
+    <%= link_to t(".back"), applications_preview_path %>
     <%= link_to t(".profile"), user_path(current_user) %>
   </div>
 </div>

@@ -42,3 +42,16 @@ en:
       no_users: There are no mentors or mentees yet for this cohort.
       new: Schedule a new cohort
       back: Back to Cohorts
+  applications:
+    preview_applications:
+      title: Applications
+      profile: View your own profile
+      more-applications: View more
+    applications:
+      title: Applications
+      profile: View your own profile
+      mentors: Applications - Mentors
+      mentees: Applications - Mentees
+      back: Back to overview
+      previous: Prev
+      next: Next
