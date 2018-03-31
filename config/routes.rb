@@ -1,16 +1,10 @@
 Rails.application.routes.draw do
-  resources :users, path: 'profiles', only: [:show, :create, :update] do
-    resource :password,
-      controller: :passwords, only: [:create, :edit, :update]
+  get "signup", to: "users#new"
+  resources :users, path: 'profiles', only: [:index, :show, :create, :update] do
+    resource :password, controller: :passwords, only: [:create, :edit, :update]
   end
 
   resources :passwords, only: [:create, :new]
-
-  controller :users do
-    get "applications", action: :applications
-    get "applications/all", action: :index
-    get "signup", action: :new
-  end
 
   resource :session, only: [:create]
   controller :sessions do
@@ -18,14 +12,19 @@ Rails.application.routes.draw do
     delete "logout", action: :destroy
   end
 
+  controller :applications do
+    get "applications/preview", action: :preview_applications
+    get "applications", action: :applications
+  end
+
   resources :cohorts
 
   constraints Clearance::Constraints::SignedIn.new { |user| user.is_admin? } do
-    root to: "users#applications", as: :admin_root
+    root to: "applications#preview_applications", as: :admin_root
   end
 
   constraints Clearance::Constraints::SignedIn.new do
-    root to: "users#show", as: :signed_in_root
+    root to: "cohorts#index", as: :signed_in_root
   end
 
   constraints Clearance::Constraints::SignedOut.new do

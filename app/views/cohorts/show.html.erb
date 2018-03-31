@@ -5,7 +5,7 @@
     <% if @relationships %>
       <% @relationships.each do |relationship| %>
         <p>
-          Mentor: <%= relationship.mentor.full_name %>, Mentee: <%= relationship.mentee.full_name %>
+          Mentor: <%= link_to relationship.mentor.full_name, user_path(relationship.mentor) %>, Mentee: <%= link_to relationship.mentee.full_name, user_path(relationship.mentee) %>
         </p>
       <% end %>
 

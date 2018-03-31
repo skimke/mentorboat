@@ -37,8 +37,27 @@ en:
       next: Next
       no_cohorts: There are no cohorts yet.
       new: Schedule a new cohort
-      back: Back
     show:
       no_users: There are no mentors or mentees yet for this cohort.
       new: Schedule a new cohort
       back: Back to Cohorts
+  applications:
+    preview_applications:
+      title: Applications
+      profile: View my profile
+      more_applications: View more
+      mentors: Mentors
+      mentees: Mentees
+      no_mentors: No mentors are waiting on us yet.
+      no_mentees: No mentees are waiting on us yet.
+      approved_users: View approved users
+    applications:
+      title: Applications
+      profile: View my profile
+      mentors: Applications - Mentors
+      mentees: Applications - Mentees
+      back: Back to overview
+      previous: Prev
+      next: Next
+      no_applications: No applications left! 🎉
+      approved_users: View approved users

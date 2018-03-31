@@ -72,7 +72,7 @@ class CohortsControllerTest < ActionDispatch::IntegrationTest
     get cohorts_url
 
     assert_select 'div.other-links' do
-      assert_select 'a', 2
+      assert_select 'a', 1
     end
   end
 
@@ -84,7 +84,7 @@ class CohortsControllerTest < ActionDispatch::IntegrationTest
     get cohorts_url
 
     assert_select 'div.other-links' do
-      assert_select 'a', 1
+      assert_select 'a', 0
     end
   end
 

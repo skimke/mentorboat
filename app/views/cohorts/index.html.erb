@@ -4,7 +4,7 @@
   <div class="cohorts-list">
     <% if @cohorts %>
       <% @cohorts.each do |cohort| %>
-        <p><%= cohort.name %></p>
+        <p><%= link_to cohort.name, cohort_path(cohort) %></p>
       <% end %>
 
       <%= link_to_prev_page @cohorts, t(".previous") %>
@@ -15,7 +15,6 @@
   </div>
 
   <div class="other-links">
-    <%= link_to t(".back"), applications_path %>
     <% if current_user.is_admin? %>
       <div><a href="#"><%= t(".new") %></a></div>
     <% end %>
