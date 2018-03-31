@@ -87,4 +87,43 @@ class CohortsControllerTest < ActionDispatch::IntegrationTest
       assert_select 'a', 1
     end
   end
+
+  test '#show redirects to index if user is not an admin and does not belong to a relationship in the cohort' do
+    user = create(:user)
+    cohort = create(:cohort, :spring)
+
+    post session_url, params: { session: { email: user.email, password: user.password } }
+
+    get cohort_url(cohort)
+
+    assert_redirected_to cohorts_url
+  end
+
+  test '#show returns success for admin users' do
+    user = create(:user, :admin)
+    cohort = create(:cohort, :spring)
+
+    post session_url, params: { session: { email: user.email, password: user.password } }
+
+    get cohort_url(cohort)
+
+    assert_response :success
+  end
+
+  test '#show returns success for non-admin users and belongs to a relationship in the cohort' do
+    user = create(:user)
+    cohort = create(:cohort, :spring)
+    create(
+      :relationship,
+      mentor: create(:user, :mentor),
+      mentee: user,
+      cohort: cohort
+    )
+
+    post session_url, params: { session: { email: user.email, password: user.password } }
+
+    get cohort_url(cohort)
+
+    assert_response :success
+  end
 end
