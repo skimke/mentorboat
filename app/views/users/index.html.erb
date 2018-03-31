@@ -1,0 +1,21 @@
+<div class="users">
+  <h2><%= t(".title") %></h2>
+
+  <div class="users-list">
+    <% if @users.present? %>
+      <% @users.each do |user| %>
+        <p><%= user.full_name %></p>
+      <% end %>
+
+      <%= link_to_prev_page @users, t(".previous") %>
+      <%= link_to_next_page @users, t(".next") %>
+    <% else %>
+      <p><%= t(".no_approved_users") %></p>
+    <% end %>
+  </div>
+
+  <div class="other-links">
+    <%= link_to t(".applications"), applications_preview_path %>
+    <%= link_to t(".profile"), user_path(current_user) %>
+  </div>
+</div>

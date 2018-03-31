@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   get "signup", to: "users#new"
-  resources :users, path: 'profiles', only: [:show, :create, :update] do
+  resources :users, path: 'profiles', only: [:index, :show, :create, :update] do
     resource :password,
       controller: :passwords, only: [:create, :edit, :update]
   end

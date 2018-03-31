@@ -1,4 +1,14 @@
 class UsersController < Clearance::UsersController
+  def index
+    page = params[:page]
+
+    if current_user.is_admin?
+      @users = User.where(is_approved: true).page(page)
+    else
+      redirect_to cohorts_url
+    end
+  end
+
   def show
     @user = current_user
   end

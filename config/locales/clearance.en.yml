@@ -55,6 +55,11 @@ en:
     new:
       title: Log in
   users:
+    index:
+      title: Profiles - Approved Users
+      profile: View your own profile
+      applications: View Applications
+      no_approved_users: There are no approved users yet.
     new:
       login: Log in
       title: Sign up

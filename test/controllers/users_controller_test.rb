@@ -10,6 +10,26 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
+  test "#index is blocked for non-admin users" do
+    user = create(:user)
+
+    post session_url, params: { session: { email: user.email, password: user.password } }
+
+    get users_url
+
+    assert_redirected_to cohorts_url
+  end
+
+  test "#index is viewable for admin users" do
+    user = create(:user, :admin)
+
+    post session_url, params: { session: { email: user.email, password: user.password } }
+
+    get users_url
+
+    assert_response :success
+  end
+
   test "#show asks for more information on their profile if they haven't already saved them" do
     user = create(:user, :new)
 
