@@ -15,6 +15,8 @@ Rails.application.routes.draw do
   controller :applications do
     get "applications/preview", action: :preview_applications
     get "applications", action: :applications
+    get "applications/:user_id", action: :show, as: :application
+    put "applications/:user_id", action: :update
   end
 
   resources :cohorts
