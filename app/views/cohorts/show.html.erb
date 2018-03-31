@@ -1,0 +1,26 @@
+<div class="cohort">
+  <h2><%= @cohort.name %></h2>
+
+  <div class="cohort-relationships">
+    <% if @relationships %>
+      <% @relationships.each do |relationship| %>
+        <p>
+          Mentor: <%= relationship.mentor.full_name %>, Mentee: <%= relationship.mentee.full_name %>
+        </p>
+      <% end %>
+
+      <%= link_to_prev_page @relationships, t(".previous") %>
+      <%= link_to_next_page @relationships, t(".next") %>
+    <% else %>
+      <p><%= t(".no_users") %></p>
+    <% end %>
+  </div>
+
+
+  <div class="other-links">
+    <%= link_to t(".back"), cohorts_path %>
+    <% if current_user.is_admin? %>
+      <div><a href="#"><%= t(".new") %></a></div>
+    <% end %>
+  </div>
+</div>

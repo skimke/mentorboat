@@ -9,4 +9,13 @@ class Cohort < ApplicationRecord
   paginates_per 10
 
   default_scope { order(starts_at: :asc, name: :asc) }
+
+  scope :by_id_and_user_id, ->(id, user_id) {
+    joins(:relationships)
+    .where(
+      'relationships.mentor_id = ? OR relationships.mentee_id = ?',
+      user_id,
+      user_id
+    ).where('cohorts.id = ?', id)
+  }
 end
