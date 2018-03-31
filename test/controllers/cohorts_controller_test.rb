@@ -202,4 +202,30 @@ class CohortsControllerTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to cohorts_url
   end
+
+  test '#update returns success for admin users' do
+    user = create(:user, :admin)
+    cohort = create(:cohort, :spring, name: 'Spring')
+    post session_url, params: { session: { email: user.email, password: user.password } }
+
+    cohort_params = { name: 'Different Cohort Name' }
+
+    assert_changes -> { cohort.reload.name }, from: 'Spring', to: 'Different Cohort Name' do
+      put cohort_url(cohort), params: { cohort: cohort_params }
+    end
+
+    assert_redirected_to cohort_url(cohort)
+  end
+
+  test '#update redirects to cohorts index for non-admin users' do
+    user = create(:user)
+    cohort = create(:cohort, :spring)
+    post session_url, params: { session: { email: user.email, password: user.password } }
+
+    assert_no_changes -> { cohort.reload } do
+      put cohort_url(cohort)
+    end
+
+    assert_redirected_to cohorts_url
+  end
 end

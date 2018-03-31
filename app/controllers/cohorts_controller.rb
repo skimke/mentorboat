@@ -21,16 +21,23 @@ class CohortsController < ApplicationController
     @relationships = @cohort.relationships.page(page).per(10)
   end
 
-  def edit
-    @cohort = Cohort.find(params[:id])
-  end
-
   def create
     @cohort = cohort_from_params
 
     if @cohort.save
       redirect_to cohort_url(@cohort)
     end
+  end
+
+  def edit
+    @cohort = Cohort.find(params[:id])
+  end
+
+  def update
+    @cohort = Cohort.find(params[:id])
+
+    @cohort.update_attributes!(cohort_params)
+    redirect_to cohort_url(@cohort)
   end
 
   private
