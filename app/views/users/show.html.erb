@@ -1,5 +1,9 @@
 <div class="profile">
-  <h2><%= @user.first_name %>'s <%= t(".title")%></h2>
+  <h2>
+  <% if current_user == @user %>My<% else %>
+    <%= @user.first_name %>'s
+  <% end %> <%= t(".title")%>
+  </h2>
 
   <% if @user.requires_details? %>
     <%= render partial: '/users/details_form', object: @user %>
