@@ -9,6 +9,8 @@ class User < ApplicationRecord
   has_many :mentoring_cohorts, through: :mentoring_relationships, source: :cohort
   has_many :goals_as_mentor, through: :mentoring_relationships, source: :goal
   has_many :goals_as_mentee, through: :mentored_relationships, source: :goal
+  has_many :feedbacks_as_mentor, through: :mentoring_relationships, source: :feedback
+  has_many :feedbacks_as_mentee, through: :mentored_relationships, source: :feedback
 
   validates :first_name, presence: true
   validates :last_name, presence: true
