@@ -1,0 +1,25 @@
+<div class="profile">
+  <h2><%= t(".title")%>: <%= @user.first_name %></h2>
+
+  <% if @user.willing_to_mentor? %>
+    <p><%= t(".willing_to_mentor") %></p>
+  <% else %>
+    <p><%= t(".not_willing_to_mentor") %></p>
+  <% end %>
+
+  <%= render partial: '/users/details', object: @user %>
+
+  <%= form_tag "/applications/#{@user.id}", method: 'patch' do %>
+    <div class="text-field">
+      <%= label_tag :cohort, t(".select_cohort") %>
+      <%= collection_select(:cohort, :cohort_id, @cohorts, :id, :name) %>
+    </div>
+
+    <div class="submit"><%= submit_tag t(".submit") %></div>
+  <% end %>
+
+  <div class="other-links">
+    <p><%= link_to t(".cancel"), application_path(@user) %></p>
+    <p><%= link_to t(".applications"), applications_path %></p>
+  </div>
+</div>

@@ -8,6 +8,7 @@
   <% end %>
 
   <%= render partial: '/users/details', object: @user %>
+  <p><%= link_to t(".approve"), approve_application_path(@user) %></p>
 
   <div class="other-links">
     <p><%= link_to t(".applications"), applications_path %></p>

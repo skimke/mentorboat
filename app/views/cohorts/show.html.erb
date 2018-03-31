@@ -6,8 +6,18 @@
   <div class="cohort-relationships">
     <% if @relationships.present? %>
       <% @relationships.each do |relationship| %>
-        <p>
-          Mentor: <%= link_to relationship.mentor.full_name, user_path(relationship.mentor) %>, Mentee: <%= link_to relationship.mentee.full_name, user_path(relationship.mentee) %>
+        <p><%= t(".mentor") %>: 
+        <% if relationship.mentor.present? %>
+          <%= link_to relationship.mentor.full_name, user_path(relationship.mentor) %>, 
+        <% else %>
+          <%= t(".unassigned") %>,
+        <% end %>
+        <%= t(".mentee") %>: 
+        <% if relationship.mentee.present? %>
+          <%= link_to relationship.mentee.full_name, user_path(relationship.mentee) %>
+        <% else %>
+          <%= t(".unassigned") %>
+        <% end %>
         </p>
       <% end %>
 
