@@ -26,7 +26,7 @@ class CohortsController < ApplicationController
   end
 
   def create
-    @cohort = cohort_from_params
+    @cohort = Cohort.new(cohort_params)
 
     if @cohort.save
       redirect_to cohort_url(@cohort)
@@ -45,10 +45,6 @@ class CohortsController < ApplicationController
   end
 
   private
-
-  def cohort_from_params
-    Cohort.new(cohort_params)
-  end
 
   def cohort_params
     params.require(:cohort).permit(
