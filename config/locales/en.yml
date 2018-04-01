@@ -45,6 +45,8 @@ en:
       mentor: Mentor
       mentee: Mentee
       unassigned: Unassigned
+      pair_a_mentor: Pair up with a mentor
+      pair_a_mentee: Pair up with a mentee
     edit:
       title: Edit
       cancel: Cancel
@@ -88,3 +90,12 @@ en:
       willing_to_mentor: "Willing to Mentor: Yes"
       not_willing_to_mentor: "Willing to Mentor: No"
       new_cohort: Please create a cohort first.
+  relationships:
+    show:
+      title: Pair Up with a
+      mentor: Mentor
+      mentee: Mentee
+      select_mentor: "Select a mentor:"
+      select_mentee: "Select a mentee:"
+      submit: Submit
+      cancel: Cancel

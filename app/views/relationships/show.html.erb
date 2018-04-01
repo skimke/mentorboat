@@ -1,0 +1,27 @@
+<div class="relationship">
+  <h2><%= t(".title") %> <%= t(".#{@desired_user_type}") %></h2>
+
+  <div class="relationship-form">
+    <p>Cohort: <%= @relationship.cohort.name %></p>
+
+    <%= form_for @relationship do |form| %>
+      <% if @relationship.mentor.nil? %>
+        <div class="select-field">
+          <%= label_tag :mentor, t(".select_mentor") %>
+          <%= collection_select(:mentor, :mentor_id, @users, :id, :first_name) %>
+        </div>
+      <% elsif @relationship.mentee.nil? %>
+        <div class="select-field">
+          <%= label_tag :mentee, t(".select_mentee") %>
+          <%= collection_select(:mentee, :mentee_id, @users, :id, :first_name) %>
+        </div>
+      <% end %>
+
+      <div class="submit"><%= submit_tag t(".submit") %></div>
+    <% end %>
+  </div>
+
+  <div class="other-links">
+    <div><%= link_to t(".cancel"), cohort_path(@relationship.cohort) %></div>
+  </div>
+</div>
