@@ -42,6 +42,9 @@ en:
       new: Schedule a new cohort
       edit: Edit this cohort
       back: Back to Cohorts
+      mentor: Mentor
+      mentee: Mentee
+      unassigned: Unassigned
     edit:
       title: Edit
       cancel: Cancel
@@ -70,3 +73,18 @@ en:
       next: Next
       no_applications: No applications left! 🎉
       approved_users: View approved users
+    show:
+      title: Application
+      approve: Approve application
+      applications: All applications
+      willing_to_mentor: "Willing to Mentor: Yes"
+      not_willing_to_mentor: "Willing to Mentor: No"
+    approve:
+      title: Approve Application
+      select_cohort: Select Cohort
+      cancel: Cancel
+      submit: Approve
+      applications: All applications
+      willing_to_mentor: "Willing to Mentor: Yes"
+      not_willing_to_mentor: "Willing to Mentor: No"
+      new_cohort: Please create a cohort first.
