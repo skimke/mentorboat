@@ -8,7 +8,7 @@ class ApplicationsControllerTest < ActionDispatch::IntegrationTest
 
     get applications_preview_url
 
-    assert_redirected_to user_url(user)
+    assert_redirected_to signed_in_root_url
   end
 
   test "#applications_preview is viewable for admin users" do
@@ -28,7 +28,7 @@ class ApplicationsControllerTest < ActionDispatch::IntegrationTest
 
     get applications_url
 
-    assert_redirected_to user_url(user)
+    assert_redirected_to signed_in_root_url
   end
 
   test "#applications is viewable for admin users" do
@@ -48,7 +48,7 @@ class ApplicationsControllerTest < ActionDispatch::IntegrationTest
 
     get application_url(user)
 
-    assert_redirected_to user_url(user)
+    assert_redirected_to signed_in_root_url
   end
 
   test "#show is viewable for admin users" do
@@ -68,7 +68,7 @@ class ApplicationsControllerTest < ActionDispatch::IntegrationTest
 
     get approve_application_url(user)
 
-    assert_redirected_to user_url(user)
+    assert_redirected_to signed_in_root_url
   end
 
   test "#approve is viewable for admin users" do
@@ -88,7 +88,7 @@ class ApplicationsControllerTest < ActionDispatch::IntegrationTest
 
     patch application_url(user)
 
-    assert_redirected_to user_url(user)
+    assert_redirected_to signed_in_root_url
   end
 
   test "#update updates is_approved to true for the application's user" do

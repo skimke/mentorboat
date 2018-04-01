@@ -62,7 +62,7 @@ class ApplicationsController < ApplicationController
 
   def ensure_admin
     unless current_user.is_admin?
-      redirect_to user_url(current_user)
+      redirect_to signed_in_root_url
     end
   end
 
