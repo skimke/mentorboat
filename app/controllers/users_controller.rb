@@ -26,6 +26,7 @@ class UsersController < Clearance::UsersController
 
   def edit
     @user = User.find(params[:id])
+    redirect_to user_url(@user) unless current_user == @user
   end
 
   def update
