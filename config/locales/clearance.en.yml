@@ -66,3 +66,6 @@ en:
       title: Profile
       show: View my profile
       change_password: Change password
+    edit:
+      title: Edit my profile
+      cancel: Cancel
