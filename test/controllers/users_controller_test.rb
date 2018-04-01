@@ -30,6 +30,27 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test "#edit is blocked if user is trying to edit someone else's profile" do
+    user = create(:user)
+    other_user = create(:user)
+
+    post session_url, params: { session: { email: user.email, password: user.password } }
+
+    get edit_user_url(other_user)
+
+    assert_redirected_to user_url(other_user)
+  end
+
+  test "#edit is viewable for user when trying to edit their own profile" do
+    user = create(:user, :admin)
+
+    post session_url, params: { session: { email: user.email, password: user.password } }
+
+    get edit_user_url(user)
+
+    assert_response :success
+  end
+
   test "#show asks for more information on their profile if they haven't already saved them" do
     user = create(:user, :new)
 
@@ -69,12 +90,30 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   test "#update stores all params to existing user" do
     user = create(:user, :new)
 
-    post session_url, params: { session: { email: user.email, password: user.password } }
+    post session_url, params: {
+      session: {
+        email: user.email,
+        password: user.password
+      }
+    }
 
-    put user_path(user), params: { user: { position: 'Magician', company: 'Hogwarts' } }
+    put user_path(user), params: {
+      user: {
+        first_name: 'Severus',
+        last_name: 'Snape',
+        email: 'snivelly@hogwarts.magic',
+        position: 'Potions Master',
+        company: 'Hogwarts',
+        experience_in_years: 999
+      }
+    }
 
-    assert_equal 'Magician', user.reload.position
+    assert_equal 'Severus', user.reload.first_name
+    assert_equal 'Snape', user.last_name
+    assert_equal 'snivelly@hogwarts.magic', user.email
+    assert_equal 'Potions Master', user.position
     assert_equal 'Hogwarts', user.company
+    assert_equal 999, user.experience_in_years
 
     assert_redirected_to user_url(user)
   end

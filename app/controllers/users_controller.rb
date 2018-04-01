@@ -24,11 +24,19 @@ class UsersController < Clearance::UsersController
     end
   end
 
-  def update
-    @user = current_user
+  def edit
+    @user = User.find(params[:id])
+    redirect_to user_url(@user) unless current_user == @user
+  end
 
-    @user.update_attributes!(user_update_params)
-    redirect_to user_url
+  def update
+    @user = User.find(params[:id])
+
+    if @user.update_attributes(user_update_params)
+      redirect_to user_url
+    else
+      render template: "users/edit"
+    end
   end
 
   private
@@ -55,6 +63,9 @@ class UsersController < Clearance::UsersController
 
   def user_update_params
     params.require(:user).permit(
+      :first_name,
+      :last_name,
+      :email,
       :position,
       :company,
       :experience_in_years
