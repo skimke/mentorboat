@@ -54,10 +54,6 @@ class CohortsController < ApplicationController
     )
   end
 
-  def ensure_admin
-    redirect_to cohorts_url unless current_user.is_admin?
-  end
-
   def cohort_id
     @cohort_id = params[:id]
   end
