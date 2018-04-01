@@ -3,10 +3,10 @@ class User < ApplicationRecord
 
   has_many :mentored_relationships, class_name: 'Relationship', foreign_key: 'mentee_id'
   has_many :mentoring_relationships, class_name: 'Relationship', foreign_key: 'mentor_id'
-  has_many :mentors, through: :mentored_relationships
-  has_many :mentees, through: :mentoring_relationships
-  has_many :mentored_cohorts, through: :mentored_relationships, source: :cohort
-  has_many :mentoring_cohorts, through: :mentoring_relationships, source: :cohort
+  has_many :mentors, -> { distinct }, through: :mentored_relationships
+  has_many :mentees, -> { distinct }, through: :mentoring_relationships
+  has_many :mentored_cohorts, -> { distinct }, through: :mentored_relationships, source: :cohort
+  has_many :mentoring_cohorts, -> { distinct }, through: :mentoring_relationships, source: :cohort
   has_many :goals_as_mentor, through: :mentoring_relationships, source: :goal
   has_many :goals_as_mentee, through: :mentored_relationships, source: :goal
   has_many :feedbacks_as_mentor, through: :mentoring_relationships, source: :feedback
