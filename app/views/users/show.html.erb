@@ -5,7 +5,7 @@
   <% end %> <%= t(".title")%>
   </h2>
 
-  <% if @user.requires_details? %>
+  <% if @user.requires_details? && current_user == @user %>
     <%= render partial: '/users/details_form', object: @user %>
   <% else %>
     <%= render partial: '/users/details', object: @user %>
