@@ -29,9 +29,9 @@
   </div>
 
   <div class="other-links">
-    <div><%= link_to t(".edit"), edit_cohort_path(@cohort) %></div>
     <div><%= link_to t(".back"), cohorts_path %></div>
     <% if current_user.is_admin? %>
+      <div><%= link_to t(".edit"), edit_cohort_path(@cohort) %></div>
       <div><%= link_to t(".new"), new_cohort_path %></div>
     <% end %>
   </div>
