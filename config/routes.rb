@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   end
 
   resources :cohorts
+  resource :relationships, only: :update
 
   constraints Clearance::Constraints::SignedIn.new { |user| user.is_admin? } do
     root to: "applications#preview_applications", as: :admin_root
