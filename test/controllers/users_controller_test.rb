@@ -61,6 +61,17 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_select 'form.profile-details-form'
   end
 
+  test "#show does not ask for additional information on their profile if user page is not their own" do
+    user = create(:user, :new)
+    other_user = create(:user, :new)
+
+    post session_url, params: { session: { email: user.email, password: user.password } }
+
+    get user_url(other_user)
+
+    assert_select 'form.profile-details-form', false
+  end
+
   test "#show renders their complete profile if they have already saved more information" do
     user = create(:user)
 
