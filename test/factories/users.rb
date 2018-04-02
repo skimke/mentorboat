@@ -19,10 +19,12 @@ FactoryBot.define do
 
     trait :mentor do
       willing_to_mentor true
+      experience_in_years 999
     end
 
     trait :mentee do
       willing_to_mentor false
+      experience_in_years 1
     end
   end
 end

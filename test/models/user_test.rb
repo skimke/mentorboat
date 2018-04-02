@@ -150,7 +150,7 @@ class UserTest < ActiveSupport::TestCase
 
   test '#cohorts returns all cohorts associated through both types of relationships' do
     mentor = create(:user, :mentor)
-    mentors_mentor = create(:user, :mentor)
+    mentors_mentor = create(:user, :mentor, experience_in_years: 9000)
     mentee = create(:user, :mentee)
     
     mentoring_cohort = create(:cohort)
@@ -175,7 +175,7 @@ class UserTest < ActiveSupport::TestCase
 
   test '#cohorts returns all cohorts associated through both types of relationships without duplication' do
     mentor = create(:user, :mentor)
-    mentors_mentor = create(:user, :mentor)
+    mentors_mentor = create(:user, :mentor, experience_in_years: 9000)
     mentee = create(:user, :mentee)
     
     cohort = create(:cohort)

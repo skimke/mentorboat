@@ -30,6 +30,13 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  activerecord:
+    errors:
+      models:
+        relationship:
+          attributes:
+            base:
+              mentor_not_experienced_enough_for_mentee: "mentor must have at least 1 year of experience more than mentee"
   cohorts:
     index:
       title: Cohorts

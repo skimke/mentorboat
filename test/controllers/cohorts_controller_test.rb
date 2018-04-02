@@ -44,7 +44,7 @@ class CohortsControllerTest < ActionDispatch::IntegrationTest
 
     create(
       :relationship,
-      mentor: create(:user, :mentor),
+      mentor: create(:user, :mentor, experience_in_years: 9000),
       mentee: user,
       cohort: cohort_for_user_as_mentee
     )
