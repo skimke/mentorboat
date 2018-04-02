@@ -92,9 +92,9 @@ en:
       new_cohort: Please create a cohort first.
   relationships:
     show:
-      title: Pair Up with a
-      mentor: Mentor
-      mentee: Mentee
+      title: Pair Up
+      mentor: with a Mentor
+      mentee: with a Mentee
       select_mentor: "Select a mentor:"
       select_mentee: "Select a mentee:"
       submit: Submit
