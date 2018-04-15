@@ -60,12 +60,6 @@ class ApplicationsController < ApplicationController
 
   private
 
-  def ensure_admin
-    unless current_user.is_admin?
-      redirect_to signed_in_root_url
-    end
-  end
-
   def update_params
     params.permit(:user_id, cohort: [:cohort_id])
   end

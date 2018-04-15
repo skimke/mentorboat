@@ -10,13 +10,21 @@
         <% if relationship.mentor.present? %>
           <%= link_to relationship.mentor.full_name, user_path(relationship.mentor) %>, 
         <% else %>
+          <% if current_user.is_admin? %>
+          <%= link_to t(".pair_a_mentor"), relationship_pair_path(relationship, relationship.mentee.id) %>,
+          <% else %>
           <%= t(".unassigned") %>,
+          <% end %>
         <% end %>
         <%= t(".mentee") %>: 
         <% if relationship.mentee.present? %>
           <%= link_to relationship.mentee.full_name, user_path(relationship.mentee) %>
         <% else %>
+          <% if current_user.is_admin? %>
+          <%= link_to t(".pair_a_mentee"), relationship_pair_path(relationship, relationship.mentor.id) %>
+          <% else %>
           <%= t(".unassigned") %>
+          <% end %>
         <% end %>
         </p>
       <% end %>

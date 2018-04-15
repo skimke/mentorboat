@@ -44,7 +44,7 @@ class CohortsControllerTest < ActionDispatch::IntegrationTest
 
     create(
       :relationship,
-      mentor: create(:user, :mentor),
+      mentor: create(:user, :mentor, experience_in_years: 9000),
       mentee: user,
       cohort: cohort_for_user_as_mentee
     )
@@ -144,7 +144,7 @@ class CohortsControllerTest < ActionDispatch::IntegrationTest
 
     get new_cohort_url
 
-    assert_redirected_to cohorts_url
+    assert_redirected_to signed_in_root_url
   end
 
   test '#edit returns success for admin users' do
@@ -166,7 +166,7 @@ class CohortsControllerTest < ActionDispatch::IntegrationTest
 
     get edit_cohort_url(cohort)
 
-    assert_redirected_to cohorts_url
+    assert_redirected_to signed_in_root_url
   end
 
   test '#create returns success for admin users' do
@@ -200,7 +200,7 @@ class CohortsControllerTest < ActionDispatch::IntegrationTest
       post cohorts_url
     end
 
-    assert_redirected_to cohorts_url
+    assert_redirected_to signed_in_root_url
   end
 
   test '#update returns success for admin users' do
@@ -226,6 +226,6 @@ class CohortsControllerTest < ActionDispatch::IntegrationTest
       put cohort_url(cohort)
     end
 
-    assert_redirected_to cohorts_url
+    assert_redirected_to signed_in_root_url
   end
 end
