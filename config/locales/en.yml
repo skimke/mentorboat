@@ -106,3 +106,8 @@ en:
       select_mentee: "Select a mentee:"
       submit: Submit
       cancel: Cancel
+  goals:
+    new:
+      title: Create a new goal
+      cancel: Cancel
+      submit: Submit

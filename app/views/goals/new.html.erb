@@ -1,0 +1,23 @@
+<div class="goals-new">
+  <h2><%= t(".title") %></h2>
+
+  <%= form_tag "/relationships/#{@relationship.id}/goals", method: 'post' do %>
+    <div class="text-field">
+      <%= label_tag :title %>
+      <%= text_field_tag :title %>
+    </div>
+
+    <div class="text-field">
+      <%= label_tag :description %>
+      <%= text_area_tag :description, size: "30x6" %>
+    </div>
+
+    <div class="submit-field">
+      <%= submit_tag t(".submit") %>
+    </div>
+
+    <div class="other-links">
+      <div><%= link_to t(".cancel"), relationship_path(@relationship) %></div>
+    </div>
+  <% end %>
+</div>

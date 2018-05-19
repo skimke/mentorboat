@@ -21,8 +21,10 @@ Rails.application.routes.draw do
   end
 
   resources :cohorts
-  resources :relationships, only: [:update] do
-    get "pair/:user_id", action: :show, as: :pair
+  resources :relationships, only: [:show, :update] do
+    get "pair/:user_id", action: :pair
+
+    resources :goals, only: [:new, :create, :edit, :update]
   end
 
   constraints Clearance::Constraints::SignedIn.new { |user| user.is_admin? } do

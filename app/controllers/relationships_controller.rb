@@ -1,7 +1,7 @@
 class RelationshipsController < ApplicationController
-  before_action :ensure_admin
+  before_action :ensure_admin, only: [:pair, :update]
 
-  def show
+  def pair
     relationship_id = params[:relationship_id]
     @relationship = Relationship.find(relationship_id)
     @user = User.find(params[:user_id])

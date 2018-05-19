@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class RelationshipsControllerTest < ActionDispatch::IntegrationTest
-  test "#show is blocked for non-admin users" do
+  test "#pair is blocked for non-admin users" do
     user = create(:user)
     relationship = create(
       :relationship,
@@ -16,7 +16,7 @@ class RelationshipsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to signed_in_root_url
   end
 
-  test "#show returns success for admin users" do
+  test "#pair returns success for admin users" do
     user = create(:user, :admin)
     relationship = create(
       :relationship,
