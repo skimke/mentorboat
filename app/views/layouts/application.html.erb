@@ -24,13 +24,16 @@
   <%= csrf_meta_tag %>
 </head>
 <body>
-  <div id="header">
-    <% if signed_in? -%>
-      <%= button_to t(".logout"), logout_path, method: :delete %>
-    <% else -%>
-      <%= link_to t(".login"), login_path %>
-    <% end -%>
-  </div>
+  <nav class="navbar navbar-light bg-light">
+    <a class="navbar-brand" href="#">Mentorboat</a>
+    <div id="header">
+      <% if signed_in? -%>
+      <%= button_to t(".logout"), logout_path, method: :delete, class: 'btn btn-link' %>
+      <% else -%>
+      <%= link_to t(".login"), login_path, class: 'btn btn-link' %>
+      <% end -%>
+    </div>
+  </nav>
 
   <div id="flash">
     <% flash.each do |key, value| -%>
@@ -38,6 +41,9 @@
     <% end %>
   </div>
 
-  <%= yield %>
+  <div class="container mt-4">
+    <%= yield %>
+  </div>
+
 </body>
 </html>
