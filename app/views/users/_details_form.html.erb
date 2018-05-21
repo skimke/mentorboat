@@ -1,20 +1,20 @@
 <%= form_for @user, html: { class: 'profile-details-form' } do |form| %>
-  <div class="text-field">
-    <%= form.label :position %>
-    <%= form.text_field :position %>
+  <div class="form-group">
+    <%= form.label :position, class: 'bmd-label-floating' %>
+    <%= form.text_field :position, class: 'form-control' %>
   </div>
 
-  <div class="text-field">
-    <%= form.label :company %>
-    <%= form.text_field :company %>
+  <div class="form-group">
+    <%= form.label :company, class: 'bmd-label-floating' %>
+    <%= form.text_field :company, class: 'form-control' %>
   </div>
 
-  <div class="text-field">
-    <%= form.label :experience %>
-    <%= form.number_field :experience_in_years, in: 1..40, step: 1 %>
+  <div class="form-group">
+    <%= form.label :experience, class: 'bmd-label-floating' %>
+    <%= form.number_field :experience_in_years, in: 1..40, step: 1, class: 'form-control' %>
   </div>
 
-  <div class="submit-field">
-    <%= form.submit %>
+  <div class="form-group">
+    <%= form.submit class: 'btn btn-primary btn-raised' %>
   </div>
 <% end %>
