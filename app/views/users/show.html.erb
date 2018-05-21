@@ -1,23 +1,26 @@
 <div class="profile">
-  <h2>
-  <% if current_user == @user %>My<% else %>
-    <%= @user.first_name %>'s
-  <% end %> <%= t(".title")%>
-  </h2>
+  <div class="card">
+    <h2 class="card-header h5">
+    <% if current_user == @user %>My<% else %>
+      <%= @user.first_name %>'s
+    <% end %> <%= t(".title")%>
+    </h2>
+    <div class="card-body">
+      <% if @user.requires_details? && current_user == @user %>
+        <%= render partial: '/users/details_form', object: @user %>
+      <% else %>
+        <%= render partial: '/users/details', object: @user %>
+      <% end %>
+    </div>
 
-  <% if @user.requires_details? && current_user == @user %>
-    <%= render partial: '/users/details_form', object: @user %>
-  <% else %>
-    <%= render partial: '/users/details', object: @user %>
-  <% end %>
-
-  <div class="other-links">
-  <% if current_user == @user %>
-    <p><%= link_to t(".change_password"),
-    edit_user_password_url(current_user) %></p>
-    <p><%= link_to t(".edit"), edit_user_url(current_user) %></p>
-  <% else %>
-    <p><%= link_to t(".show"), user_path(current_user) %></p>
-  <% end %>
+    <div class="card-body other-links">
+      <% if current_user == @user %>
+        <p><%= link_to t(".change_password"),
+        edit_user_password_url(current_user) %></p>
+        <p><%= link_to t(".edit"), edit_user_url(current_user) %></p>
+      <% else %>
+        <p><%= link_to t(".show"), user_path(current_user) %></p>
+      <% end %>
+    </div>
   </div>
 </div>

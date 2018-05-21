@@ -1,17 +1,41 @@
 <div class="profile-details">
-  <div>
-    <p>Name: <%= @user.full_name %></p>
+  <h5 class="card-title">
+    <%= @user.full_name %>
+  </h5>
+
+  <div class="row">
+    <div class="col-4">
+      <p>Email:</p>
+    </div>
+    <div class="col-8">
+      <p class="card-text"><%= @user.email %></p>
+    </div>
   </div>
-  <div>
-    <p>Email: <%= @user.email %></p>
+
+  <div class="row">
+    <div class="col-4">
+      <p>Position:</p>
+    </div>
+    <div class="col-8">
+      <p class="card-text"><%= @user.position || 'N/A' %></p>
+    </div>
   </div>
-  <div>
-    <p>Position: <%= @user.position || 'N/A' %></p>
+
+  <div class="row">
+    <div class="col-4">
+      <p>Company:</p>
+    </div>
+    <div class="col-8">
+      <p class="card-text"><%= @user.company || 'N/A' %></p>
+    </div>
   </div>
-  <div>
-    <p>Company: <%= @user.company || 'N/A' %></p>
-  </div>
-  <div>
-    <p>Experience (years): <%= @user.experience %></p>
+
+  <div class="row">
+    <div class="col-4">
+      <p>Experience (years):</p>
+    </div>
+    <div class="col-8">
+      <p class="card-text"><%= @user.experience %></p>
+    </div>
   </div>
 </div>
